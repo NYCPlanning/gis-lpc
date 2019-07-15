@@ -38,6 +38,10 @@ try:
     boundaries_zoning_related_lyr_path = config.get('PATHS', 'boundaries_zoning_related_lyr_path')
     print("Variable paths set")
 
+    # Disconnect all users
+    arcpy.AcceptConnections(sde_path, False)
+    arcpy.DisconnectUser(sde_path, "ALL")
+
     # Create temp directory if it doesn't already exist
     print("Creating temporary directory")
     if not os.path.exists(lpc_temp_path):
@@ -287,7 +291,14 @@ try:
     log.write(str(StartTime) + "\t" + str(EndTime) + "\t" + str(EndTime - StartTime) + "\n")
     log.close()
 
+    # accept connections to GISPROD again
+    arcpy.AcceptConnections(sde_path, True)
+
 except:
+
+    # accept connections to GISPROD again
+    arcpy.AcceptConnections(sde_path, True)
+
     tb = sys.exc_info()[2]
     tbinfo = traceback.format_tb(tb)[0]
 
