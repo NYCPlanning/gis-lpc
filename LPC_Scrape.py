@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 try:
     # Set configuration file path
     config = ConfigParser.ConfigParser()
-    config.read(r'G:\SCRIPTS\Open_Data_LPC_Scrape\ini\LPC_Scrape.ini')
+    config.read(r'LPC_Scrape_template.ini')
 
     # Set log path
     log_path = config.get("PATHS", "log_path")
