@@ -100,7 +100,7 @@ try:
 
         zip = zipfile.ZipFile(zip_path)
 
-        # Extract zip to C:\temp\building_footprints directory
+        # Extract zip to temp landmarks preservation commission
 
         print("Extracting zipped LPC files")
         zip.extractall(lpc_temp_path)
@@ -254,12 +254,16 @@ try:
     # Export stand-alone xml files to requisite M: drive layer directories
 
     print("Exporting stand-alone metadata xml files for all requisite M: drive layer files")
+    arcpy.env.workspace = building_lots_lyr_path
+    arcpy.env.overwriteOutput = True
     arcpy.ExportMetadata_conversion(os.path.join(sde_path, 'LPC_Designated_Individual_Landmarks'), translator,
                                     os.path.join(building_lots_lyr_path, 'Individual Landmarks - Designated (LPC).lyr.xml'))
     arcpy.ExportMetadata_conversion(os.path.join(sde_path, 'LPC_Individual_Landmark_Historic_Districts_Building_Database'),
                                     translator, os.path.join(building_lots_lyr_path, 'Landmark and Historic District buildings (LPC).lyr.xml'))
     arcpy.ExportMetadata_conversion(os.path.join(sde_path, 'LPC_Individual_Landmarks'), translator,
                                     os.path.join(building_lots_lyr_path, 'Landmark Actions (LPC).lyr.xml'))
+    arcpy.env.workspace = facilities_landmarks_lyr_path
+    arcpy.env.overwriteOutput = True
     arcpy.ExportMetadata_conversion(os.path.join(sde_path, 'LPC_Scenic_Landmarks'), translator,
                                     os.path.join(facilities_landmarks_lyr_path, 'Scenic Landmarks (LPC).lyr.xml'))
     arcpy.ExportMetadata_conversion(os.path.join(sde_path, 'LPC_Historic_Districts'), translator,
@@ -275,8 +279,14 @@ try:
                                     os.path.join(facilities_landmarks_lyr_path, 'Landmark Actions (LPC).lyr.xml'))
     arcpy.ExportMetadata_conversion(os.path.join(sde_path, 'LPC_Individual_Landmark_Historic_Districts_Building_Database'), translator,
                                     os.path.join(facilities_landmarks_lyr_path, 'Landmark and Historic District buildings (LPC).lyr.xml'))
+    arcpy.env.workspace = boundaries_zoning_related_lyr_path
+    arcpy.env.overwriteOutput = True
+    arcpy.ExportMetadata_conversion(os.path.join(sde_path, 'LPC_Scenic_Landmarks'), translator,
+                                    os.path.join(boundaries_zoning_related_lyr_path, 'Scenic Landmarks (LPC).lyr.xml'))
     arcpy.ExportMetadata_conversion(os.path.join(sde_path, 'LPC_Historic_Districts'), translator,
-                                    os.path.join(boundaries_zoning_related_lyr_path, 'Historic Districts - Designated (LPC).lyr.xml'))
+                                    os.path.join(boundaries_zoning_related_lyr_path, 'Historic districts (LPC).lyr.xml'))
+    arcpy.env.workspace = facilities_landmarks_lyr_path
+    arcpy.env.overwriteOutput = True
     arcpy.ExportMetadata_conversion(os.path.join(sde_path, 'LPC_Historic_Districts'), translator,
                                     os.path.join(facilities_landmarks_lyr_path, 'Historic Districts.lyr.xml'))
     arcpy.ExportMetadata_conversion(os.path.join(sde_path, 'LPC_Scenic_Landmarks'), translator,
